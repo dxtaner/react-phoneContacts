@@ -1,29 +1,29 @@
 import { useState, useEffect } from "react";
+
 const initialFormValues = { fullName: "", unvan: "", phoneNumber: "" };
 
 function Form(addContact, contacts) {
   const [form, setForm] = useState(initialFormValues);
-  
+
   useEffect(() => {
     setForm(initialFormValues);
   }, [contacts]);
-  
+
   const onChangeInput = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
+    if (form.fullName === "" || form.unvan === "" || form.phoneNumber === "") {
+      return false;
+    }
 
-    if(form.fullName === "" || form.unvan === "" || form.phoneNumber === "")
-    return false;
-
-    //addContact([...contacts, form]);
-    addContact([...contacts,form])
-};
+    addContact([...contacts, form]);
+  };
 
   return (
-    <div>
+    <form onSubmit={onSubmit}>
       <div>
         <input
           name="fullName"
@@ -49,9 +49,9 @@ function Form(addContact, contacts) {
         ></input>
       </div>
       <div>
-        <button onClick={onSubmit}>ADD</button>
+        <button className="btn">ADD</button>
       </div>
-    </div>
+    </form>
   );
 }
 
