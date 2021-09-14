@@ -40,4 +40,6 @@ ul,li{
 #btn > button{
     padding: 5px;
     width: 50px;
+    color: red;
+    
 }
